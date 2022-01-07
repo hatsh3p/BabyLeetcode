@@ -2,10 +2,10 @@ public class EvenDigitsCounter {
     public static int counter(int[] nums) {
         int evenCount = 0;
         for (int n : nums) {
-            int result = n;
+            int numToDivide = n;
             int digits = 0;
-            while (result > 0) {
-                result = result / 10;
+            while (numToDivide > 0) {
+                numToDivide = numToDivide / 10;
                 ++digits;
             }
             if (digits % 2 == 0) {
