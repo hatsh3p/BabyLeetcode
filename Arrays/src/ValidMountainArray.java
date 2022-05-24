@@ -4,28 +4,44 @@ public class ValidMountainArray {
             return false;
         }
 
-        boolean increasing = arr[1] > arr[0];
+        boolean isIncreasing;
+        boolean isDecreasing;
+        boolean reachedPeak = false;
+
+        if (arr[0] < arr[1]) {
+            isIncreasing = true;
+            isDecreasing = false;
+        } else {
+            return false;
+        }
 
         for (int i = 1; i < arr.length; i++) {
-            if (arr[i] == arr[i - 1]) {
+            if (arr[i] == arr[i-1] || isIncreasing && reachedPeak) {
                 return false;
             }
-            if (increasing) {
+            if (isIncreasing && !reachedPeak) {
                 if (arr[i] < arr[i - 1]) {
-                    increasing = false;
+                    isIncreasing = false;
+                    isDecreasing = true;
+                    reachedPeak = true;
                 }
-            } else {
+            }
+            if (isDecreasing) {
                 if (arr[i] > arr[i - 1]) {
-                    return false;
+                    isDecreasing = false;
+                    isIncreasing = true;
                 }
             }
         }
-
-        return !increasing;
+        if (isDecreasing & !isIncreasing) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static void main(String[] args) {
-        int[] arr = {0, 3, 2, 1};
+        int[] arr = {1, 2, 3, 4, 5};
         boolean isMountainArray = validMountainArray(arr);
         System.out.println(isMountainArray);
     }
