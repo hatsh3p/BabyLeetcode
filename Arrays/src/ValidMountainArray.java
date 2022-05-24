@@ -5,12 +5,10 @@ public class ValidMountainArray {
         }
 
         boolean isIncreasing;
-        boolean isDecreasing;
         boolean reachedPeak = false;
 
         if (arr[0] < arr[1]) {
             isIncreasing = true;
-            isDecreasing = false;
         } else {
             return false;
         }
@@ -22,22 +20,16 @@ public class ValidMountainArray {
             if (isIncreasing && !reachedPeak) {
                 if (arr[i] < arr[i - 1]) {
                     isIncreasing = false;
-                    isDecreasing = true;
                     reachedPeak = true;
                 }
             }
-            if (isDecreasing) {
+            if (!isIncreasing) {
                 if (arr[i] > arr[i - 1]) {
-                    isDecreasing = false;
                     isIncreasing = true;
                 }
             }
         }
-        if (isDecreasing & !isIncreasing) {
-            return true;
-        } else {
-            return false;
-        }
+        return !isIncreasing;
     }
 
     public static void main(String[] args) {
