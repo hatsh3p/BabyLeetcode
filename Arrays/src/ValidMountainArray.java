@@ -4,29 +4,19 @@ public class ValidMountainArray {
             return false;
         }
 
-        boolean isIncreasing;
+        boolean isIncreasing = (arr[0] < arr[1]) ? true : false;
         boolean reachedPeak = false;
 
-        if (arr[0] < arr[1]) {
-            isIncreasing = true;
-        } else {
-            return false;
-        }
-
         for (int i = 1; i < arr.length; i++) {
-            if (arr[i] == arr[i-1] || isIncreasing && reachedPeak) {
+            if (isIncreasing && reachedPeak || arr[i] == arr[i-1]) {
                 return false;
             }
-            if (isIncreasing && !reachedPeak) {
-                if (arr[i] < arr[i - 1]) {
-                    isIncreasing = false;
-                    reachedPeak = true;
-                }
+            if (isIncreasing && !reachedPeak && arr[i] < arr[i - 1]) {
+                isIncreasing = false;
+                reachedPeak = true;
             }
-            if (!isIncreasing) {
-                if (arr[i] > arr[i - 1]) {
-                    isIncreasing = true;
-                }
+            if (!isIncreasing && arr[i] > arr[i - 1]) {
+                isIncreasing = true;
             }
         }
         return !isIncreasing;
